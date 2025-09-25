@@ -1,11 +1,7 @@
-Health and weather data for UK regions from 1981 - 2022.
+Project linking health and weather data for ten UK regions from 1981 - 2022.
 
-Directories/files included:
+This project will analyse weekly mortality data from England and Wales (1981–2020) alongside historical weather records to explore correlations between extreme weather events and public health outcomes. By adjusting for regional population changes and combining health data with temperature, precipitation, and humidity trends, we assess the short-term and long-term impacts of weather on mortality. Our findings will help stakeholders, such as health services and policymakers, improve preparedness, target vulnerable groups, and inform cost-benefit analyses of public health interventions.
 
-Data/HealthData - The health data we will primarily use is in HealthData/Weekly_deaths_by_age_and_region_1981_2022
+Directories included:
 
-Data/labelled_regions_map.png  - shows the UK regions we are considering in this study. Note that although Scotland is truncated and labelled on the map, it is not included in our statistics. 
-
-Data/PopulationStatistics - Populations for different local authorities by year since 1981. The regions we are looking at are made up of groups of these 'local authorities', so we need to sum the population in each local authority to get the region's population each year.
-
-Data/WeatherData - Weather data for the largest city/cities in each region.
+/Data - contains all of the health and weather data used in the project
