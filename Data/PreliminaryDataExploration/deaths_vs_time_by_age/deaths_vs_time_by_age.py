@@ -40,7 +40,7 @@ age_groups_to_plot = ["45-49", "50-54", "55-59", "60-64", "65-69",
 						"70-74", "75-79", "80-84", "85-89", "90-94"]
               
 # sample evenly spaced colors from a continuous map
-cmap = colormaps["tab10"]  # or "viridis", "plasma", "tab20b", etc.
+cmap = colormaps["tab10"]  # or "viridis", "plasma", "tab20b"
 N = len(age_groups_to_plot)
 colors = [cmap(i / max(N-1, 1)) for i in range(N)]
  
