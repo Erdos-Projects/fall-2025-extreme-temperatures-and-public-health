@@ -47,8 +47,10 @@ colors = [cmap(i / max(N-1, 1)) for i in range(N)]
 for i, group in enumerate(age_groups_to_plot):
     col_name = group.replace("<","under").replace("+","plus")
     legend_label = group.replace("<", r"$<$").replace("+", r"$+$")  # LaTeX-safe
-    plt.scatter(df["Week_start"],df[f"deaths_{col_name}"],s=0.5,color=colors[i],label=legend_label)
+    plt.scatter(df["Week_start"],df[f"deaths_{col_name}"],s=2,color=colors[i],label=legend_label)
 
+#plt.xlim(pd.to_datetime('2003-01-01'), pd.to_datetime('2007-12-31'))
+#plt.ylim(-100,3000)
 plt.xlabel(r"\rm Year")
 plt.ylabel(r"\rm Weekly registered deaths")
 plt.title(r"\rm Weekly Deaths by Age Group")
