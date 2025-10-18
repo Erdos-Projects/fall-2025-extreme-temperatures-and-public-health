@@ -60,7 +60,7 @@ list_of_cities = [
 ]
 
 #open deaths data
-deaths_data_loc = "../../HealthData/Weekly_deaths_by_age_and_region_1981_2022/"
+deaths_data_loc = "../../../HealthData/Weekly_deaths_by_age_and_region_1981_2022/"
 deaths_data_file = "weeklydeathoccurrences19812022final.csv"
 df = pd.read_csv(deaths_data_loc + deaths_data_file)
 print(df.head())
@@ -84,7 +84,7 @@ for i in range(len(list_of_region_codes)):
 #for each week, make column of the mean of the 7 daily max temperatures
 for i in range(len(list_of_regions)):
     #open weather data
-    weather_data_loc = f"../../Weather_data/{list_of_regions[i]}/"
+    weather_data_loc = f"../../../Weather_data/{list_of_regions[i]}/"
     weather_data_file = f"{list_of_cities[i]}_1981-01-01_to_2019-12-31.csv"
     weather_df = pd.read_csv(weather_data_loc + weather_data_file)
 
