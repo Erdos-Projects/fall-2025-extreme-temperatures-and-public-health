@@ -8,20 +8,20 @@ Short bursts of heat and cold can affect a person's health, particularly the eld
 
 ## Problem Statement
 
-We measure how weeks of unusually hot or cold weather shift mortality relative to expected baselines—by region and age group—while controlling for long-term trends and seasonality.
+We measure how weeks of unusually hot or cold weather shift mortality relative to expected baselines, by region and age group, while controlling for long-term trends and seasonality.
 
 ## Objectives
 
-* Build population-adjusted weekly mortality rates for each region.
-* Estimate short-term (0–3 week) lagged effects of heat and cold on mortality.
-* Assess the impact of extreme weather based on region and age group.
+* Build population-adjusted weekly excess mortality rates for each region.
+* Estimate short-term effects of heat and cold on mortality.
+* Assess the impact of extreme weather based on e.g. region and age group.
 * Produce simple indicators that can pair with forecasts for surge planning.
 
 ## KPIs
 
-* Accuracy of excess-mortality estimates on held-out weeks.
+* Accuracy of excess mortality estimates on unseen historical weeks.
 * Consistency of effect direction/magnitude across regions and age groups.
-* Clarity and usefulness of stakeholder-facing summaries.
+* Clarity and usefulness of stakeholder facing summaries.
 * Reproducibility of data processing and modelling.
 
 ## Stakeholders
@@ -29,8 +29,6 @@ We measure how weeks of unusually hot or cold weather shift mortality relative t
 Public health agencies, emergency planners, health services, local authorities and UK residents.
 
 ## Project Setup
-
-TBD: environment file, package versions, how to run scripts end-to-end.
 
 ## Data
 
@@ -42,16 +40,16 @@ TBD: environment file, package versions, how to run scripts end-to-end.
 ## Repository Structure
 
 * /HealthData
-
   * Weekly_deaths_by_age_and_region_1981_2022 (primary dataset)
-* /PopulationStatistics
-
+* /Weather_Data
   * Daily weather for largest city/cities in each region
-* /WeatherData
-
+* /PreliminaryDataExploration
+  * An initial look at the data to generate some feel for the data
 * labelled_regions_map.png (Scotland labeled but excluded from stats)
-* /scripts (TBD exact files)
-* /figures (generated charts and tables)
+* /BasicModelling
+  * Modelling the data with a simply polynomial, assessing only the impact of temperature
+* /PyTorchModellingAndPredictions
+  * A CNN model, trained on the weekly data for weather and excess deaths
 
 ## Approach
 
@@ -60,6 +58,8 @@ Baseline Processing:
 * We identify a seasonal trend, with a yearly peak at winder and dip in summer. This corresponds to the seasonal flu.
 * We remove the seasonal effects from the data with LOESS-smoothed trend fitting. This then highlights the impact of shorter term weather effects.
 * We define 'extreme temperatures' as being daily maximums outside the range of 8-21 degrees celsius. This is when an increase in deaths above the seasonal baseline is seen.
+
+![Temperature versus excess deaths](/Data/PreliminaryDataExploration/temperature_vs_deaths/sub_moving_avg/Weekly_max_temp_vs_deaths_1981-2020_WestMidlands.png)
 
 Simple modelling and projections:
 
