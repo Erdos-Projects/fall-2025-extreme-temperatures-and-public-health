@@ -135,6 +135,19 @@ The DLNM is designed to solve two problems at once:
 ---
 
 ## 2. The Model Formula
+In the R code we used the following formula:
+
+deaths ~ cb_temp + ns(time, df = 15) + ns(doy, df = 12) + as.factor(dow)
+
+It is equivalent to this conceptual model:
+
+$$
+Log(E[Deaths_t]) = \alpha + f(Temp_t, \text{lag}) + s(\text{time}) + s(\text{doy}) + \beta(\text{dow})
+$$
+
+Here is what each component means:
+
+
 
 
 ## Conclusions and Future Implications
