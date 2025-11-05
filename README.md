@@ -86,7 +86,7 @@ We model the weekly excess deaths for each region as a function of weekly aggreg
 * **Per-region splits.** For each region we create train/test CSVs (80/20, seeded) and quick diagnostics plots of `tempmax` vs. excess deaths. 
 * **Model.** A CNN (64->32->1 with ReLU + dropout) is trained separately per region on up to six features: `tempmax, tempmin, snowdepth, humidity, windspeed, precipitation`. The collection of features used can be adjusted. We find the combination of `tempmax, tempmin, snowdepth, humidity` gives the best results. Training uses Adam, mini-batches, input Gaussian noise to augment the training data (sigma=0.05), dropout (p=0.10), and early stopping. We save `model.pt` and `preprocess.npz` (feature order and scaling). 
 * **Test-time inference & plots.** For each region we reload the saved scaler + model to predict on the test data set, exported to `test_temp_pred_actual.csv` plus scatter/histogram figures comparing predicted vs. actual excess deaths against `tempmax`. 
-* **Domenstration of use.** As a demonstration, using monthly median weather for June/December (1981–2019) we show how +/-5°C shifts in `tempmax` affect the model’s implied change in monthly deaths. A weather forecast could equally be used to predict upcoming excess deaths, or a climate model based forecast for determining longer tends.
+* **Demonstration of use.** As a demonstration, using monthly median weather for June/December (1981–2019) we show how +/-5°C shifts in `tempmax` affect the model’s implied change in monthly deaths. A weather forecast could equally be used to predict upcoming excess deaths, or a climate model based forecast for determining longer tends.
 * **One-click run.** `0_run_modelling.py` executes all steps associated with this modelling (files beginning 1_ to 9_) in order. 
 
 ### Validation
@@ -106,9 +106,13 @@ We evaluate the prediction quality of our model on the unseen test data, and pro
 | All combined  | Train | 16,280 | 0.044 | 29.54 | 0.956 |     Yes    |
 | All combined  | Test  |  4,070 | 0.029 | 29.43 | 0.971 |     Yes    |
 
-For London's test data, below we show the predicted excess deaths versus the true excess deaths for the model as trained on `tempmax, tempmin, snowdepth, humidity`.
+For one region's test data, below we show the predicted excess deaths versus the true excess deaths for the model as trained on `tempmax, tempmin, snowdepth, humidity`.
 
-![Model predictions on test data](Data/PyTorchModellingAndPredictions/CNN_Modelling_deseasonalised/region_splits/E12000007/temp_vs_actual_and_pred_TEST.png)
+![Model predictions on test data](/Data/PyTorchModellingAndPredictions/CNN_Modelling_deseasonalised/region_splits/E12000005/temp_vs_actual_and_pred_TEST.png)
+
+Demonstration of use: Using monthly median weather for June/December (1981–2019) we show how shifts in `tempmax` affect the model’s implied change in monthly deaths. A weather forecast could equally be used to predict upcoming excess deaths, or a climate model based forecast for determining longer tends.
+
+![Model predictions on median weather data](/Data/PyTorchModellingAndPredictions/CNN_Modelling_deseasonalised/region_splits/E12000005/expected_excess_vs_temp_shift_Jun_Dec.png)
 
 *Interpretation:*
 We find an R^2 near 0 and consistent (but minimal) improvement vs. the zero baseline. This implies that short term weekly variability in excess deaths is dominated by noise and/or unmodelled factors i.e. non-weather factors. Non-zero slopes or curvature in the residual vs temperature plots would signal missed features. However, the flat residual trends we find suggest the ML model has captured what little signal exists in the data.
