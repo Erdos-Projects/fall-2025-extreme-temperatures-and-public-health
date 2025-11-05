@@ -106,7 +106,7 @@ We evaluate the prediction quality of our model on the unseen test data, and pro
 | All combined  | Train | 16,280 | 0.044 | 29.54 | 0.956 |     Yes    |
 | All combined  | Test  |  4,070 | 0.029 | 29.43 | 0.971 |     Yes    |
 
-(1)R^2 is low for the data after the removal of the seasonal trend (largely due to flu). Without this removal (see /Data/PyTorchModellingAndPredictions/CNN_Modelling_not_deseasonalised) it is much higher.
+(1)R^2 is low for the data after the removal of the seasonal trend (which is largely due to winter flu). Without this removal (see /Data/PyTorchModellingAndPredictions/CNN_Modelling_not_deseasonalised) R^2 is much higher.
 
 For one region's test data, below we show the predicted excess deaths versus the true excess deaths for the model as trained on `tempmax, tempmin, snowdepth, humidity`.
 
