@@ -74,16 +74,16 @@ We model the (detrended) weekly excess deaths for each region as a function of w
 
 * **Data prep.** We merge ONS weekly deaths with weekly means of daily weather (e.g., tempmax, humidity, windspeed). Deaths are detrended with a LOESS smoother to remove long-run and seasonal structure before modelling, and 1981–2019 data are retained. Output: `region_weather_vs_excess_deaths.csv`. 
 * **Per-region splits.** For each region we create train/test CSVs (80/20, seeded) and quick diagnostics plots of `tempmax` vs. excess deaths. 
-* **Model.** A compact feed-forward MLP (64→32→1 with ReLU + dropout) is trained **separately per region** on six features: `tempmax, tempmin, windspeed, precip, snowdepth, humidity`. Inputs and target are standardized using **train-split** statistics; `snowdepth` NAs are set to 0. Training uses Adam (lr=2.5e-4), mini-batches, input Gaussian noise (σ=0.05), dropout (p=0.10), and early stopping (patience=50, min Δ=1e-3). We save `model.pt` and `preprocess.npz` (feature order and scaling). 
-* **Test-time inference & plots.** For each region we reload the saved scaler + model to predict on the held-out set and export `test_temp_pred_actual.csv` plus scatter/histogram figures comparing **predicted vs. actual** excess deaths against `tempmax`. 
-* **Counterfactual demo.** Using monthly median weather for June/December (1981–2019) we sweep ±5 °C shifts in `tempmax` to visualize the model’s implied change in monthly deaths (centered at Δ=0). 
+* **Model.** A NN (64->32->1 with ReLU + dropout) is trained separately per region on six features: `tempmax, tempmin, windspeed, precip, snowdepth, humidity`. Training uses Adam (lr=2.5e-4), mini-batches, input Gaussian noise (σ=0.05), dropout (p=0.10), and early stopping (patience=50, min Δ=1e-3). We save `model.pt` and `preprocess.npz` (feature order and scaling). 
+* **Test-time inference & plots.** For each region we reload the saved scaler + model to predict on the test data set, exported to `test_temp_pred_actual.csv` plus scatter/histogram figures comparing predicted vs. actual excess deaths against `tempmax`. 
+* **Counterfactual demo.** As a demonstration, using monthly median weather for June/December (1981–2019) we show how +/-5°C shifts in `tempmax` affect the model’s implied change in monthly deaths (centered at Δ=0). A weather forecast could equally be used to predict upcoming excess deaths, or a climate model based forecast for determining longer tends.
 * **One-click run.** `0_run_modelling.py` executes all steps (1 to 8) in order. 
 
 ### Validation
 
-We evaluate prediction quality on TRAIN (held-out) weeks and probe for systematic errors:
+We evaluate prediction quality on test data, i.e. the held-out weeks, and probe for systematic errors.
 
-* **Train/test protocol.** Within each region, rows are randomly split 80/20. All scaling is fit on the train portion only and applied to validation/test. 
+* **Train/test protocol.** Within each region, rows are randomly split 80/20 into train/test data. The test data is never seen until validation of the model.
 * **Primary metrics (per region + TOTAL).** We report R^2, RMSE, MAE, NMSE, and a pseudo-R^2. We also benchmark against a zero baseline (predict 0 excess deaths), reporting RMSE of that baseline and % improvement vs. zero. A summary CSV with regional rows, plus a concatenated total row, is saved as metrics_summary.csv. 
 * For each region we save:
 
@@ -93,6 +93,12 @@ We evaluate prediction quality on TRAIN (held-out) weeks and probe for systemati
 
 *Interpretation guide:*
 We find an R^2 near 0 and consistent (but minimal) improvement vs. the zero baseline. This implies that short-term weekly excess-death variability is dominated by noise and/or unmodelled drivers. Non-zero slopes/curvature in the residual vs temperature plots would signal misspecification (e.g., omitted interactions or thresholds). However, the flat residual trends we find suggest the ML model has captured what little signal exists in the data.
+
+| Region | Split |   Rows |    R**2 |    MAE |  NMSE | Beats Zero |
+| ------ | ----- | -----: | ----: | -----: | ----: | :--------: |
+| All combined  | Train | 16,280 | 0.067 | 29.494 | 0.933 |     Yes    |
+| All combined  | Test  |  4,070 | 0.020 | 29.310 | 0.980 |     Yes    |
+
 
 ## Conclusions and Future Implications
 
@@ -111,5 +117,3 @@ This project has been developed for the Fall 2025 Erdös Institute Data Science 
 
 * Tom Rose
 * Sunit Patil
-* Pratiti Deb
-* Derek Zapata
