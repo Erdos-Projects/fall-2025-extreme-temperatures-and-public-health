@@ -205,11 +205,17 @@ These metrics evaluate how well the *entire* model (temperature + confounders) e
 ### Diagnostic & Output Plots
 
 * **Main Result (`dlnm_rr_curve_2D.png`):** This is the **primary result** of the analysis. It's the 2D "U-shaped" plot showing the *adjusted* risk of temperature after all confounders have been removed. It is used to find the MMT and thresholds.
+
+  ![RR mortality plot 2D](Data/Modeling/DLNM_plots/dlnm_rr_curve_2D_London.png)
     
 
 * **Raw Data Check (`raw_deaths_vs_temp_scatter.png`):** This `ggplot` scatter plot is a simple diagnostic tool showing the *unadjusted* relationship between daily deaths and temperature. Its U-shape is different from the main result because it still includes the effects of seasonality (e.g., flu season).
 
+  ![Daily Deaths vs Mean Daily Temperature scatter](Data/Modeling/DLNM_plots/raw_deaths_vs_temp_scatter_London.png)
+
 * **3D Risk Surface (`dlnm_rr_curve.png`):** This 3D plot is the default output from `dlnm`. It visualizes the full risk model, showing **Temperature** (x-axis), **Lag (days)** (y-axis), and **Relative Risk** (z-axis). It is useful for seeing *when* the risk occurs (e.g., the peak of heat risk at 2-3 days).
+
+  ![3D Risk Surface](Data/Modeling/DLNM_plots/dlnm_rr_curve_London.png)
 
 ###  Conclusion
 
