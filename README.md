@@ -1,6 +1,6 @@
 # fall-2025-extreme-temperatures-and-public-health
 
-We investigate the effects of short periods of extreme weather on public health across UK regions (1981–2022).
+We investigate the effects of short periods of extreme weather on public health across 10 different UK regions (1981–2022).
 
 ## Background
 
@@ -8,7 +8,7 @@ Short bursts of hot and cold weather can affect a person's health, particularly 
 
 ## Problem Statement
 
-We measure how weeks of unusually hot or cold weather shift mortality relative to expected baselines, by region and age group, while controlling for long-term trends and seasonality.
+We measure how weeks of unusually hot or cold weather shift mortality relative to expected baselines, by region, while controlling for long-term trends and seasonality.
 
 ## Objectives
 
@@ -101,10 +101,11 @@ We evaluate the prediction quality of our model on the unseen test data, and pro
   * **Residual structure checks.** We plot `(prediction − actual)` against `tempmax` and overlay 1,000 bootstrapped linear fits to estimate the mean slope +/-sd. A slope near 0 indicates no linear residual bias with respect to temperature. 
   * **Nonlinearity check.** We repeat with 1,000 bootstrapped quadratic fits and display the mean +/-sd of the linear and quadratic coefficients to detect curvature in residuals. 
 
-| Region | Split |   Rows |    R**2 |    MAE |  NMSE | Beats Zero |
+| Region | Split |   Rows |    R**2(1) |    MAE |  NMSE | Beats Zero |
 | ------ | ----- | -----: | ----: | -----: | ----: | :--------: |
 | All combined  | Train | 16,280 | 0.044 | 29.54 | 0.956 |     Yes    |
 | All combined  | Test  |  4,070 | 0.029 | 29.43 | 0.971 |     Yes    |
+(1)R^2 is low for the data after the removal of the seasonal trend (largely due to flu). Without this removal (see /Data/PyTorchModellingAndPredictions/CNN_Modelling_not_deseasonalised) it is much higher.
 
 For one region's test data, below we show the predicted excess deaths versus the true excess deaths for the model as trained on `tempmax, tempmin, snowdepth, humidity`.
 
