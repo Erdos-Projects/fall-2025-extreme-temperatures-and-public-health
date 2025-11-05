@@ -72,7 +72,7 @@ Weekly excess deaths versus temperature for the region of the West Midlands:
 
 ### Simple modelling and projections:
 
-* In /Data/BasicModeling/deaths_vs_temperature/region_breakdown, we show a simple second order polynomial fit to the data, looking only at the impact of the mean of the week's 7 daily maximum temperatures on excess deaths. This fit is motivated by the appearance of the data, rather than an expected or predicted relationship (which is likely extremely complex). This shows a rise in deaths during the hottest and coldest weeks.
+* In /Data/BasicPolynomialModeling/deaths_vs_temperature/region_breakdown, we show a simple second order polynomial fit to the data, looking only at the impact of the mean of the week's 7 daily maximum temperatures on excess deaths. This fit is motivated by the appearance of the data, rather than an expected or predicted relationship (which is likely extremely complex). This shows a rise in deaths during the hottest and coldest weeks.
 
 * We also looked at a breakdown by region and age. However, we find that breaking the data down into this granularity leaves only a weak signal with a high level of noise. We therefore proceed with our modelling using a regional breakdown only.
 
@@ -229,16 +229,16 @@ These metrics evaluate how well the *entire* model (temperature + confounders) e
 
 * **Main Result (`dlnm_rr_curve_2D.png`):** This is the **primary result** of the analysis. It's the 2D "U-shaped" plot showing the *adjusted* risk of temperature after all confounders have been removed. It is used to find the MMT and thresholds.
 
-  ![RR mortality plot 2D](Data/Modeling/DLNM_plots/dlnm_rr_curve_2D_London.png)
+  ![RR mortality plot 2D](Data/TimeLagModeling/DLNM_plots/dlnm_rr_curve_2D_London.png)
     
 
 * **Raw Data Check (`raw_deaths_vs_temp_scatter.png`):** This `ggplot` scatter plot is a simple diagnostic tool showing the *unadjusted* relationship between daily deaths and temperature. Its U-shape is different from the main result because it still includes the effects of seasonality (e.g., flu season).
 
-  ![Daily Deaths vs Mean Daily Temperature scatter](Data/Modeling/DLNM_plots/raw_deaths_vs_temp_scatter_London.png)
+  ![Daily Deaths vs Mean Daily Temperature scatter](Data/TimeLagModeling/DLNM_plots/raw_deaths_vs_temp_scatter_London.png)
 
 * **3D Risk Surface (`dlnm_rr_curve.png`):** This 3D plot is the default output from `dlnm`. It visualizes the full risk model, showing **Temperature** (x-axis), **Lag (days)** (y-axis), and **Relative Risk** (z-axis). It is useful for seeing *when* the risk occurs (e.g., the peak of heat risk at 2-3 days).
 
-  ![3D Risk Surface](Data/Modeling/DLNM_plots/dlnm_rr_curve_London.png)
+  ![3D Risk Surface](Data/TimeLagModeling/DLNM_plots/dlnm_rr_curve_London.png)
 
 
 ## 5. Conclusions & Key Insights
