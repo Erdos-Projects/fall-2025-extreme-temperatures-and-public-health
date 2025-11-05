@@ -202,6 +202,27 @@ These metrics evaluate how well the *entire* model (temperature + confounders) e
 * **MAE = 11.91**
     * The **Mean Absolute Error** shows that, on an average day, the model's prediction of the death count was off by approximately **12 deaths**. Given the daily fluctuations, this represents a high degree of accuracy.
  
+### Results For All Regions
+
+### Final Results Summary (All Regions)
+
+| Region | R² (Model Fit) | MMT (°C) | Cold Threshold (°C) | Heat Threshold (°C) |
+| :--- | :--- | :--- | :--- | :--- |
+| **London** | 81.6% | 18°C | 9°C | 24°C |
+| **South East** | 65.3% | 19°C | 9°C | 26°C |
+| **West Midlands** | 59.7% | 19°C | 9°C | 27°C |
+| **East of England** | 56.7% | 19°C | 9°C | 29°C |
+| **East Midlands** | 52.7% | 19°C | 9°C | 30°C |
+| **Yorkshire & Humber**| 63.1% | 20°C | 9°C | **NA** |
+| **South West** | 55.7% | 20°C | 9°C | **NA** |
+| **North West** | 71.7% | 21°C | 9°C | **NA** |
+| **North East** | 52.7% | 27°C | 9°C | **NA** |
+> **A Note on `NA` Results:**
+>
+> An `NA` in the **Heat Threshold** column is not an error. It is a key finding. It indicates that the model did not find a statistically significant mortality risk from heat for that region.
+>
+> This happens because the 95% confidence interval (the grey "error bar" on the plot) was too wide and never fully rose above the 1.0 relative risk line. This results in a "J-shaped" curve, which suggests that only cold weather poses a significant, measurable threat to public health in that region.
+ 
 ### Diagnostic & Output Plots
 
 * **Main Result (`dlnm_rr_curve_2D.png`):** This is the **primary result** of the analysis. It's the 2D "U-shaped" plot showing the *adjusted* risk of temperature after all confounders have been removed. It is used to find the MMT and thresholds.
@@ -216,6 +237,7 @@ These metrics evaluate how well the *entire* model (temperature + confounders) e
 * **3D Risk Surface (`dlnm_rr_curve.png`):** This 3D plot is the default output from `dlnm`. It visualizes the full risk model, showing **Temperature** (x-axis), **Lag (days)** (y-axis), and **Relative Risk** (z-axis). It is useful for seeing *when* the risk occurs (e.g., the peak of heat risk at 2-3 days).
 
   ![3D Risk Surface](Data/Modeling/DLNM_plots/dlnm_rr_curve_London.png)
+
 
 ###  Conclusion
 
