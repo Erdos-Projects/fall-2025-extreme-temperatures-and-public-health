@@ -131,9 +131,8 @@ The primary goal is to answer these questions:
 1.  What is the **Minimum Mortality Temperature (MMT)**, the "safest" temperature for London?
 2.  What is the "U-shaped" curve of risk? (i.e., how much does risk increase as it gets hotter or colder?)
 3.  What are the "cutoff" thresholds where heat and cold become statistically significant public health threats? That is, when the Relative Risk (RR) rises above 1.
-4.  How many "excess deaths" over the 30-year period are attributable to these non-optimal temperatures?
 
-## 1. The Statistical Model
+## a. The Statistical Model
 
 The model we are using is a **Poisson Generalized Linear Model (GLM)**.
 
@@ -148,9 +147,25 @@ The DLNM is designed to solve two problems at once:
 
 ---
 
-## 2. The Model Formula
+## b. The Model Formula
+In the R code we use the following formula for the number of deaths: 
+deaths ~ cb_temp + ns(time, df = 15) + ns(doy, df = 12) + as.factor(dow)
+This is equivalant to the conceptual model:
 
+$$Log(E[Deaths_t]) = \alpha + f(Temp_t, \text{lag}) + s(\text{time}) + s(\text{doy}) + \beta(\text{dow})$$
 
+Where each component means:
+
+* **$Log(E[Deaths_t])$**: The **Logarithm of the Expected Deaths** on a given day, $t$. This is our outcome.
+* **$\alpha$ (alpha)**: The **Intercept**, or the baseline average log-death rate when all other variables are zero.
+* **$f(Temp_t, \text{lag})$**: This is the **DLNM component**, which your code calls `cb_temp`. This is the most important term. It's a 3D "surface" that represents the complex, lagged, and non-linear effect of temperature.
+* **$s(\text{time})$**: This is a **Confounder** for **Long-Term Trends**. Your code uses `ns(time, ...)`. This is a smooth line (a spline) that "soaks up" the effect of things like improving healthcare, declining smoking rates, or population growth over the 30-year period.
+* **$s(\text{doy})$**: This is a **Confounder** for **Seasonality**. Your code uses `ns(doy, ...)`. This is a smooth function of the "day of year" (1-365) that "soaks up" all seasonal effects that *aren't* temperature, like the flu season, holidays, or changes in air pollution.
+* **$\beta(\text{dow})$**: This is a **Confounder** for **Day of Week**. Your code uses `as.factor(dow)`. This accounts for administrative artifacts, such as death reporting delays over the weekend.
+
+By including the confounders, we can be more confident that the `cb_temp` term is isolating the *true* effect of temperature alone.
+
+## c. 
 
 
 
