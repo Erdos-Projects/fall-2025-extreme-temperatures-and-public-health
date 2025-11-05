@@ -108,7 +108,7 @@ We evaluate the prediction quality of our model on the unseen test data, and pro
 
 For the test data, below we show the predicted excess deaths versus the true excess deaths for the model as trained on `tempmax, tempmin, snowdepth, humidity`.
 
-![Test data](/Data/PyTorchModellingAndPredictions/CNN_Modelling_deseasonalised/region_splits/E12000007/temp_vs_actual_and_pred_TEST.png)
+![Model predictions on test data](/Data/PyTorchModellingAndPredictions/CNN_Modelling_deseasonalised/region_splits/E12000007/temp_vs_actual_and_pred_TEST.png)
 
 *Interpretation:*
 We find an R^2 near 0 and consistent (but minimal) improvement vs. the zero baseline. This implies that short term weekly variability in excess deaths is dominated by noise and/or unmodelled factors i.e. non-weather factors. Non-zero slopes or curvature in the residual vs temperature plots would signal missed features. However, the flat residual trends we find suggest the ML model has captured what little signal exists in the data.
