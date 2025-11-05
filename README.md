@@ -201,6 +201,8 @@ These metrics evaluate how well the *entire* model (temperature + confounders) e
 ### Diagnostic & Output Plots
 
 * **Main Result (`dlnm_rr_curve_2D.png`):** This is the **primary result** of the analysis. It's the 2D "U-shaped" plot showing the *adjusted* risk of temperature after all confounders have been removed. It is used to find the MMT and thresholds.
+
+  ![RR mortality plot 2D](dlnm_rr_curve_2D_London.png)
     
 
 * **Raw Data Check (`raw_deaths_vs_temp_scatter.png`):** This `ggplot` scatter plot is a simple diagnostic tool showing the *unadjusted* relationship between daily deaths and temperature. Its U-shape is different from the main result because it still includes the effects of seasonality (e.g., flu season).
