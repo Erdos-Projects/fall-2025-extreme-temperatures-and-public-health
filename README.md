@@ -121,7 +121,38 @@ These data are in `PyTorch_model_fit_metrics_summary.csv` and `simple_polynimial
 
 ## Time-lag effects
 
-In the analysis above, we have only considered the contemporaneous impacts of the weather. Close to the end of the project, we also decided to investigate the potential of delayed impacts i.e. extreme weather events causing excess deaths in subsequent weeks.
+In the analysis above, we have only considered the contemporaneous impacts of the weather. Close to the end of the project, we also decided to investigate the potential of delayed impacts i.e. extreme weather events causing excess deaths in subsequent weeks. To study those effects we used the **Distributed Lag Non-linear Model (DLNM)** model through a package in R. We give a summary of the model and the results below: 
+
+## Overview: Modeling Temperature-Mortality using Distributed Lag Non-linear Model (DLNM)
+
+This approach uses a standard epidemiological method to analyze the complex relationship between daily temperature and public health. The goal is **not to predict** future deaths, but to **explain** the historical, underlying relationship.
+
+The primary goal is to answer these questions:
+1.  What is the **Minimum Mortality Temperature (MMT)**, the "safest" temperature for London?
+2.  What is the "U-shaped" curve of risk? (i.e., how much does risk increase as it gets hotter or colder?)
+3.  What are the "cutoff" thresholds where heat and cold become statistically significant public health threats? That is, when the Relative Risk (RR) rises above 1.
+4.  How many "excess deaths" over the 30-year period are attributable to these non-optimal temperatures?
+
+## 1. The Statistical Model
+
+The model we are using is a **Poisson Generalized Linear Model (GLM)**.
+
+* **GLM:** This is the "parent" model. We use it because our outcome (`deaths`) is a "count" (a non-negative integer), not a continuous number like a stock price.
+* **Poisson:** This is the specific type of GLM for count data. It models the *logarithm* of the expected number of deaths.
+
+The main challenge is that the effect of temperature is complex. To handle this, we add a sophisticated component called a **Distributed Lag Non-linear Model (DLNM)**.
+
+The DLNM is designed to solve two problems at once:
+1.  **Non-linear (U-Shape):** The relationship isn't a straight line. Risk is low at a "safe" temperature and increases for *both* cold and heat. We use a **spline** to let the model "find" this U-shape.
+2.  **Distributed Lag (Delayed Effect):** The health impact of a temperature spike isn't just immediate. Heat effects can be delayed by 1-3 days, and cold effects can be delayed for *weeks* (e.g., a cold snap leading to pneumonia 10 days later). The DLNM captures this delayed effect over a 21-day "lag" window.
+
+---
+
+## 2. The Model Formula
+
+
+
+
 
 ## Conclusions and Future Implications
 
