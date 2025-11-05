@@ -128,6 +128,7 @@ In the analysis above, we have only considered the contemporaneous impacts of th
 * Periods of extreme heat and cold have a tangible effect of public health. They cause an increase in excess deaths.
 * However, this effect is smaller than the random fluctuations (noise) is the weekly deaths data.
 * Our models are therefore unlikely to be useful in predicting the need for surge planning, as was initially envisioned.
+* A brief but incomplete look at time lag effects near the end of the project appears to show promising results and may improve the predictive power of our model.
 * Our models are likely more suited to predicting longer term effects e.g. how a long period of warm weather or climate change will affect public health in the long term.
 
 ## References
