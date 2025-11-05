@@ -203,6 +203,27 @@ These metrics evaluate how well the *entire* model (temperature + confounders) e
 * **MAE = 11.91**
     * The **Mean Absolute Error** shows that, on an average day, the model's prediction of the death count was off by approximately **12 deaths**. Given the daily fluctuations, this represents a high degree of accuracy.
  
+### Results For All Regions
+
+### Final Results Summary (All Regions)
+
+| Region | R² (Model Fit) | MMT (°C) | Cold Threshold (°C) | Heat Threshold (°C) |
+| :--- | :--- | :--- | :--- | :--- |
+| **London** | 81.6% | 18°C | 9°C | 24°C |
+| **South East** | 65.3% | 19°C | 9°C | 26°C |
+| **West Midlands** | 59.7% | 19°C | 9°C | 27°C |
+| **East of England** | 56.7% | 19°C | 9°C | 29°C |
+| **East Midlands** | 52.7% | 19°C | 9°C | 30°C |
+| **Yorkshire & Humber**| 63.1% | 20°C | 9°C | **NA** |
+| **South West** | 55.7% | 20°C | 9°C | **NA** |
+| **North West** | 71.7% | 21°C | 9°C | **NA** |
+| **North East** | 52.7% | 27°C | 9°C | **NA** |
+> **A Note on `NA` Results:**
+>
+> An `NA` in the **Heat Threshold** column is not an error. It is a key finding. It indicates that the model did not find a statistically significant mortality risk from heat for that region.
+>
+> This happens because the 95% confidence interval (the grey "error bar" on the plot) was too wide and never fully rose above the 1.0 relative risk line. This results in a "J-shaped" curve, which suggests that only cold weather poses a significant, measurable threat to public health in that region.
+ 
 ### Diagnostic & Output Plots
 
 * **Main Result (`dlnm_rr_curve_2D.png`):** This is the **primary result** of the analysis. It's the 2D "U-shaped" plot showing the *adjusted* risk of temperature after all confounders have been removed. It is used to find the MMT and thresholds.
@@ -218,9 +239,45 @@ These metrics evaluate how well the *entire* model (temperature + confounders) e
 
   ![3D Risk Surface](Data/Modeling/DLNM_plots/dlnm_rr_curve_London.png)
 
-###  Conclusion
 
-The analysis clearly identifies a non-linear, delayed relationship between temperature and mortality in London. The model demonstrates a strong explanatory fit and successfully pinpoints the temperature thresholds (9°C and 25°C) that represent a significant public health burden.
+## 5. Conclusions & Key Insights
+
+This analysis successfully modeled the temperature-mortality relationship across all 9 regions of England using an adaptive methodology. The results reveal clear, actionable patterns in public health vulnerability.
+
+### Overall Conclusions
+
+1.  **Cold is a Universal & Consistent Risk:** The most striking finding is the consistency of the cold effect. **Every single one of the 9 regions** showed a statistically significant **Cold Threshold of 9°C**.
+
+2.  **Heat Risk is Highly Regional, Not National:** The effect of heat is *not* one-size-fits-all. The analysis revealed two distinct groups in England:
+    * **Heat-Vulnerable:** 5 regions (primarily in the South and Midlands) showed a statistically significant heat effect.
+    * **Heat-Resilient:** 4 regions (primarily in the North and South West) showed **no statistically significant risk from heat** (`Heat Threshold: NA`).
+    * This implies that public health policies for heat (like heatwave warnings and cooling centers) should be targeted specifically at vulnerable regions rather than applied nationally.
+
+3.  **The Model is a Strong Explanatory Tool:** The R² values (ranging from 52% to 82%) confirm that the model (temperature + seasonality + long-term trends) is a robust tool for explaining the majority of the variance in daily deaths across England.
+
+---
+
+### Region-Specific Insights
+
+The 9 regions clearly fall into two categories, defined by the *shape* of their mortality curve.
+
+#### Group 1: "U-Shape" Regions (Heat & Cold Vulnerable)
+These regions show a classic **U-shaped curve**, where both high and low temperatures lead to a significant increase in mortality.
+
+* **London:** (MMT: 18°C, Cold: 9°C, Heat: 24°C)
+    London is the most vulnerable region, especially to heat. It has the lowest MMT (18°C) and the lowest heat threshold (24°C). This is a classic signature of an **Urban Heat Island (UHI)** effect, where the dense urban environment amplifies heat and increases population vulnerability.
+
+* **South East, West Midlands, East of England, East Midlands:**
+    This group forms the rest of the heat-vulnerable cluster. Their MMTs are consistently around 19°C, and their heat thresholds are clustered in the high 20s (26°C - 30°C).
+
+#### Group 2: "J-Shape" Regions (Cold Vulnerable Only)
+These regions show a **J-shaped curve**, where risk significantly increases with cold, but flattens out or does not significantly rise with heat.
+
+* **North West, Yorkshire & Humber, South West:**
+    These regions all show a very similar pattern: a "safe" temperature (MMT) around 20-21°C, a clear cold threshold at 9°C, and **no statistically significant heat effect**. This suggests their populations are well-adapted to the high temperatures they normally experience.
+
+* **North East:** (MMT: 27°C, Cold: 9°C, Heat: NA)
+    This is the most extreme example of a J-shaped curve. The model found the "safest" temperature to be 27°C, meaning the risk curve is essentially flat for all warm and hot temperatures. This is a very strong finding that for the North East, only cold weather poses a significant, measurable threat to public health.
 
 
 
