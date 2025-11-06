@@ -1,4 +1,4 @@
-# R Model Workflow (In Words)
+# R Model Workflow 
 
 This document outlines the workflow of the R script, which performs the main statistical analysis. The script's goal is to move from the pre-processed `London1_data.csv` file to the final epidemiological results, including the MMT, risk thresholds, and all output plots.
 
@@ -43,4 +43,5 @@ This document outlines the workflow of the R script, which performs the main sta
         3.  **The Raw Scatter Plot (`..._scatter.png`):** This is a diagnostic `ggplot` scatter plot of the *raw* data (deaths vs. temp) to show the *unadjusted* relationship for a visual sanity check.
 
 8.  **Quantify Excess Deaths (Attributable Deaths)**
+
     * The final section of the script attempts to calculate the *total number* of "excess deaths" over the 30-year period that are directly attributable to days being hotter or colder than the MMT found in Step 5.
