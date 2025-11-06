@@ -183,13 +183,13 @@ The model was successfully fitted to the entire 30-year dataset (1985-2014) for 
 
 The main goal was to identify the temperature-mortality relationship, which is best summarized by the following points:
 
-* **Minimum Mortality Temperature (MMT): 17°C**
-    * The model identified 17°C as the "safest" temperature for London, where the relative risk of mortality is at its absolute minimum.
+* **Minimum Mortality Temperature (MMT): 18°C**
+    * The model identified 18°C as the "safest" temperature for London, where the relative risk of mortality is at its absolute minimum.
 
 * **Temperature Risk Thresholds:**
     * **Cold Threshold: 9°C**
-    * **Heat Threshold: 25°C**
-    * These thresholds define the "safe" temperature band. The model found that once the temperature drops to **9°C or below**, or rises to **25°C or above**, the mortality risk becomes statistically significant (with 95% confidence).
+    * **Heat Threshold: 24°C**
+    * These thresholds define the "safe" temperature band. The model found that once the temperature drops to **9°C or below**, or rises to **24°C or above**, the mortality risk becomes statistically significant (with 95% confidence).
 
 This core result is visualized in the output file `dlnm_rr_curve_2D.png`, which shows the U-shaped relative risk curve.
 
@@ -198,10 +198,10 @@ This core result is visualized in the output file `dlnm_rr_curve_2D.png`, which 
 
 These metrics evaluate how well the *entire* model (temperature + confounders) explains the variance in the original data.
 
-* **R² = 0.814** (or 81.4%)
-    * This indicates a very strong fit. The model (including temperature, long-term trends, and seasonality) successfully explains **81.4% of the daily variance in deaths**.
+* **R² = 0.816** (or 81.6%)
+    * This indicates a very strong fit. The model (including temperature, long-term trends, and seasonality) successfully explains **81.6% of the daily variance in deaths**.
 
-* **MAE = 11.91**
+* **MAE = 11.84**
     * The **Mean Absolute Error** shows that, on an average day, the model's prediction of the death count was off by approximately **12 deaths**. Given the daily fluctuations, this represents a high degree of accuracy.
  
 ### Results For All Regions
@@ -229,16 +229,16 @@ These metrics evaluate how well the *entire* model (temperature + confounders) e
 
 * **Main Result (`dlnm_rr_curve_2D.png`):** This is the **primary result** of the analysis. It's the 2D "U-shaped" plot showing the *adjusted* risk of temperature after all confounders have been removed. It is used to find the MMT and thresholds.
 
-  ![RR mortality plot 2D](Data/TimeLagModeling/DLNM_plots/dlnm_rr_curve_2D_London.png)
+  ![RR mortality plot 2D](Data/TimeLagModeling/DLNM_plots_all/dlnm_rr_curve_2D_London.png)
     
 
 * **Raw Data Check (`raw_deaths_vs_temp_scatter.png`):** This `ggplot` scatter plot is a simple diagnostic tool showing the *unadjusted* relationship between daily deaths and temperature. Its U-shape is different from the main result because it still includes the effects of seasonality (e.g., flu season).
 
-  ![Daily Deaths vs Mean Daily Temperature scatter](Data/TimeLagModeling/DLNM_plots/raw_deaths_vs_temp_scatter_London.png)
+  ![Daily Deaths vs Mean Daily Temperature scatter](Data/TimeLagModeling/DLNM_plots_all/raw_deaths_vs_temp_scatter_London.png)
 
 * **3D Risk Surface (`dlnm_rr_curve.png`):** This 3D plot is the default output from `dlnm`. It visualizes the full risk model, showing **Temperature** (x-axis), **Lag (days)** (y-axis), and **Relative Risk** (z-axis). It is useful for seeing *when* the risk occurs (e.g., the peak of heat risk at 2-3 days).
 
-  ![3D Risk Surface](Data/TimeLagModeling/DLNM_plots/dlnm_rr_curve_London.png)
+  ![3D Risk Surface](Data/TimeLagModeling/DLNM_plots_all/dlnm_rr_curve_3D_London.png)
 
 
 ## 5. Conclusions & Key Insights
