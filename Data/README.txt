@@ -28,5 +28,3 @@ E12000007, London, London
 E12000008, South East, Brighton and Hove
 E12000009, South West, Bristol
 W92000004, Wales, Cardiff
-
-(labelled_regions_map.png)
