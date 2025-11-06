@@ -1,4 +1,4 @@
-# Python Preprocessing Workflow (In Words)
+# Python Preprocessing Workflow
 
 This document outlines the step-by-step process used by the Python script to prepare the raw data for our R-based DLNM mortality model.
 
@@ -38,4 +38,5 @@ The main goal is to **merge** two separate, potentially misaligned datasets (wea
 
 7.  **Export Final "Model-Ready" File**
     * Finally, the script saves this new, clean, and complete table as a single CSV file (`London1_data.csv`).
+
     * This file is now perfectly formatted and ready to be loaded directly into R for the DLNM analysis.
