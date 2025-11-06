@@ -119,9 +119,6 @@ for code in list_of_region_codes:
     
     # subtract smoothed baseline
     df[col] = y - smoothed
-# --------------------------------------------------------------------------
-
-# --------------------------------------------------------------------------
 
 #make individual plots for each region   
 for i in range(len(list_of_regions)):

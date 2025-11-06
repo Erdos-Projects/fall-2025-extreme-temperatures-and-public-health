@@ -133,6 +133,7 @@ for i in range(len(list_of_regions)):
 	if x.size >= 10:
 		y_smooth = lowess(y, x, frac=0.2, return_sorted=False)
 		T0 = x[np.nanargmin(y_smooth)]
+		xc = x - T0
 
 		def quad(z, a, b, c):
 			return a*z*z + b*z + c
@@ -169,7 +170,7 @@ for i in range(len(list_of_regions)):
 		y_hat = quad(x_grid - T0, *popt)
 		plt.plot(x_grid, y_hat, linewidth = 2, color = 'k', linestyle = '--')
 
-	plt.xlabel(r'\rm Mean daily maximum temperature / $^{\\circ}$C')
+	plt.xlabel(r'\rm Mean daily maximum temperature / degrees C')
 	plt.ylabel(r'\rm Number of excess deaths')
 	title_str = r"\rm Weekly max temperature vs. deaths, 1981-2020: " + list_of_region_names_for_plots[i]
 	plt.title(title_str)
