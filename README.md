@@ -241,7 +241,7 @@ These metrics evaluate how well the *entire* model (temperature + confounders) e
   ![3D Risk Surface](Data/TimeLagModeling/DLNM_plots_all/dlnm_rr_curve_3D_London.png)
 
 
-## 5. Conclusions & Key Insights
+## d. Conclusions & Key Insights
 
 This analysis successfully modeled the temperature-mortality relationship across all 9 regions of England using an adaptive methodology. The results reveal clear, actionable patterns in public health vulnerability.
 
