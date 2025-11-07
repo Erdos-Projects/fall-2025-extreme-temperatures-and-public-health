@@ -52,10 +52,12 @@ An age breakdown of weekly deaths for all regions:
   * Daily weather for largest city/cities in each region. This is taken to represent the weather for that whole region.
 * /PreliminaryDataExploration
   * An initial look at the data to generate some feel for the data
-* /BasicModelling
+* /BasicPolynomialModeling
   * Modelling the data with a simply polynomial, assessing only the impact of temperature
 * /PyTorchModellingAndPredictions/CNN_Modelling_deseasonalised/
   * A CNN model, trained on the weekly data for weather and excess deaths
+* /TimeLagModeling
+  * Distributed Lag Non-linear Model, which considers a time delay to the weather events and excess deaths
 * labelled_regions_map.png
   * A map of the 10 different regions (Scotland labeled but excluded from the government statistics)
 ## Approach
